@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useEffect, useState } from 'react'
 import { RxDotFilled } from 'react-icons/rx'
 import { FirstGroupSlide, SecondGroupSlide, ThirdGroupSlide, FourGroupSlide } from '../../components/Card/CardComponent'
 

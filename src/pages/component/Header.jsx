@@ -1,6 +1,5 @@
-import React from "react";
-
 export function Header(props) {
+
 
     let { text, name } = props;
     return (
@@ -9,5 +8,14 @@ export function Header(props) {
                 <h1 className="font-bold text-3xl">{text}{name}</h1>
             </div>
         </>
+    )
+}
+
+export function HeaderCaption(props) {
+    let { text } = props;
+
+    return (
+        <div><span>{text}</span></div>
+
     )
 }

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 
 
 import { LabIcon, RayosXIcon, EcoIcon, InterconsultaIcon, TratamientoIcon, ProcedientoIcon } from "../Icons/iconsSVG";
+import { useEffect, useState } from "react";
 
 export function CardComponent( { nombre, atenciones, icono } ) {
   const usuariosState = useSelector( state => state.usuarios)
@@ -81,6 +82,7 @@ export function SecondGroupSlide() {
       }, x),
     {}
   );
+
     return (
       <>
       <div className="grid grid-cols-3 gap-2">
@@ -137,3 +139,4 @@ export function FourGroupSlide() {
       </>
     );
 }
+

@@ -6,7 +6,7 @@ import { IconoAtenciones, IconoSedes, IconoClientes, IconoServicios, IconoAfilia
 export function BotonHome(props) {
     const {boton, text} = props;
 
-    let icono = "";
+    /* let icono = "";
 
     switch (boton) {
       case "atenciones":
@@ -33,12 +33,12 @@ export function BotonHome(props) {
       case "configuraciones":
         icono = <IconoConfiguraciones />;
         break;
-    }
+    } */
 
 
     return (
       <div className="w-40 h-40 grid items-center border border-primary hover:bg-primary hover:bg-opacity-10 hover:border-none transition-colors justify-items-center p-5 rounded-md">
-        {icono}
+        {boton}
         <p className="font-medium text-primary">{text}</p>
       </div>
     );

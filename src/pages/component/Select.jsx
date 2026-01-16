@@ -9,6 +9,13 @@ export function SelectServicio({value, onChange}) {
     { value: 'Procedimiento', label: 'Procedimiento' },
     { value: 'RayosX', label: 'RayosX' },
     { value: 'Ecografia', label: 'Ecografia' },
+    { value: 'Laboratorio', label: 'Laboratorio' },
+    { value: 'Tratamiento', label: 'Tratamiento' },
+    { value: 'Interconsulta', label: 'Interconsulta' },
+    { value: 'Pediatria', label: 'Pediatria' },
+
+
+
   ];
 
   return(

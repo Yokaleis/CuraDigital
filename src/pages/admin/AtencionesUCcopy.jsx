@@ -10,6 +10,8 @@ import { Header } from "../component/Header";
 
 /* REACT ICONS */
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
+import { LabIcon, RayosXIcon, EcoIcon, InterconsultaIcon, TratamientoIcon, ProcedientoIcon } from "../../components/Icons/iconsSVG";
+import { useMemo } from "react";
 
 export function TableHeader() {
   return (
@@ -38,7 +40,7 @@ export function TableBody() {
 
   const handleEdit = (index) => {
     dispatch(setUserToEdit({ user: usuarios[index], isEditing: true }));
-    navigate(`/editar-atencion/${usuarios[index].id}`);
+    navigate(`/administrador/editar-atencion/${usuarios[index].id}`);
   };
   const handleDelete = (index) => {
     dispatch(deleteUsuario(index));
@@ -97,17 +99,98 @@ export function AntencionesUCcopy() {
   
     return (
         <>
-        <Header text="Atenciones Urgent Care"/>
+        <Header text="Listado de atenciones"/>
         <div className="grid grid-flow-col grid-cols-2/2 gap-2">
-            <SlideCounter />
-            <SlideCounterInterconsultas />
+        <ContadorServicios/>
           </div>
           <div className="grid justify-items-end mb-10">
-            <Link to={"/nueva-atencion"}>
+            <Link to={"/administrador/nueva-atencion"}>
             <ButtonPrimary text="Crear atención"/>
             </Link>
           </div>
         <TableBody/>
         </>
     )
+}
+
+/**
+ * Componente ContadorServicios
+ * 
+ * Este componente muestra un contador de usuarios por cada tipo de servicio.
+ * Los datos provienen del estado global de Redux (state.usuarios.usuarios).
+ * 
+ * Admite dos formatos de datos en la propiedad `servicio` de cada usuario:
+ * - Array de strings: ["Laboratorio", "RayosX"]
+ * - Array de objetos: [{label:"Laboratorio", value:"Laboratorio"}]
+ */
+
+export function ContadorServicios() {
+
+  // 1. Obtenemos la lista de usuarios desde Redux
+  const usuarios = useSelector((state) => state.usuarios.usuarios);
+
+  // 2. Definimos los servicios que queremos contabilizar
+  const serviciosList = [
+    "Laboratorio", 
+    "RayosX", 
+    "Ecografia", 
+    "Procedimiento", 
+    "Pediatria", 
+    "Interconsulta", 
+    "Tratamiento",
+  ]
+
+  // 3. Asociamos cada servicio con un ícono
+  const serviciosIconos = {
+    Laboratorio: <LabIcon/>,
+    RayosX: <RayosXIcon/>,
+    Ecografia: <EcoIcon/>,
+    Procedimiento: <ProcedientoIcon/>,
+    Pediatria: <InterconsultaIcon/>,
+    Interconsulta: <InterconsultaIcon/>,
+    Tratamiento: <InterconsultaIcon/>
+  }
+
+  /** * 4. Calculamos los contadores de servicios usando useMemo * 
+   * - Recorremos la lista de servicios con reduce. 
+   * - Para cada servicio, filtramos los usuarios que lo tienen asignado. 
+   * - La verificación acepta tanto strings como objetos {label, value}. 
+   * * - Guardamos el total en un objeto acumulador. */
+  const servicioContador = useMemo(() => { 
+    return serviciosList.reduce((acc, service) => { 
+      acc[service] = usuarios.filter((user) => { 
+        const arr = user.servicio; 
+        // Caso 1: Si es array de strings 
+        if (Array.isArray(arr) && arr.some((s) => s === service)) { 
+          return true; 
+        } 
+        // Caso 2: Si es array de objetos {label, value} 
+        if ( Array.isArray(arr) && 
+        arr.some((s) => s?.value === service || s?.label === service) ) { 
+          return true; 
+        } return false; }).length; return acc; }, 
+        {});
+       }, [usuarios, serviciosList]);
+  // 5. Renderizamos la grilla con cada servicio y su contador
+  return (
+    <>
+    <>
+    <div className="grid grid-cols-3 gap-2">
+      {serviciosList.map((service) => (
+        <div
+          key={service}
+          className="grid grid-flow-col auto-cols-max gap-4 p-4 bg-white border border-gray-200 rounded-lg justify-between shadow-100"
+        >
+          <div className="flex items-center">
+            
+            <span className="mr-2">{serviciosIconos[service]}</span>
+            {/* Renderiza el nombre del servicio y el contador */}
+            <span>{service}: {servicioContador[service] || 0}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </>
+    </>
+  )
 }

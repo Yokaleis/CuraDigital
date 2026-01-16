@@ -60,7 +60,7 @@ export function CrearUsuario(){
         e.target.reset() 
         }
         
-        navigate('/aurgentcare')
+        navigate('/administrador/aurgentcare')
         // console.log(nuevoUsuario)
     }
     useEffect(() => {
@@ -197,7 +197,7 @@ export function CrearUsuario(){
               <button className="mr-6" type="submit">
                 <ButtonPrimary text="Guardar" />
               </button>
-              <Link to={"/aurgentcare"}>
+              <Link to={"/administrador/aurgentcare"}>
                 <ButtonCancel text="Cancelar" />
               </Link>
             </div>

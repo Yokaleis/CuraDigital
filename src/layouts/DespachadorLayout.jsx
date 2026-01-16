@@ -1,8 +1,8 @@
 import { Sidebar, SidebarCondicional } from "../components/Sidebar/Sidebar";
 
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 
-export const AdminLayout = () => {
+export const DespachadorLayout = () => {
     return (
         <div className="xl:h-[100vh] min-h-screen grid grid-cols-1 xl:grid-cols-6">
             <SidebarCondicional/>

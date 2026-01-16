@@ -12,9 +12,10 @@
   "dependencies": {
     "@headlessui/react": "^2.1.5",
     "@reduxjs/toolkit": "^2.0.1",
+    "firebase": "^12.7.0",
     "flowbite-react": "^0.6.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "react-icons": "^4.11.0",
     "react-modal": "^3.16.1",
     "react-redux": "^9.0.0",

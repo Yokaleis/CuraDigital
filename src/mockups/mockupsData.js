@@ -62,7 +62,7 @@ export const people = [
       cedula: '8254125',
       edad: '35',
       aseguradora: 'Seguros Caracas',
-      servicio: ['Pediatría', 'Interconsulta', 'Procedimiento'],
+      servicio: ['Pediatria', 'Interconsulta', 'Procedimiento'],
       creacion: '28/10/2023 - 8:00',
       via: 'OMT'
     }

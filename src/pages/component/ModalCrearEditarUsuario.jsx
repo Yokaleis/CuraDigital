@@ -29,6 +29,11 @@ export function ModalCrearyEditar(){
       setEdad(userToEdit.edad);
       setAseguradora(userToEdit.aseguradora);
       setServicio(userToEdit.servicio.map((servicio) => servicio.value) || [] );
+      /* setServicio(
+        Array.isArray(userToEdit.servicio)
+        ? userToEdit.servicio.map(s => typeof s === "string" ? s : s.value)
+        : []
+      ) */
       setCreacion(userToEdit.creacion);
     } else {
       setNombre("");
@@ -52,13 +57,13 @@ export function ModalCrearyEditar(){
         creacion,
       }
       if (isEditing) {
-        const index = usuarios.findIndex((u) => u.index === userToEdit.index);
+        const index = usuarios.findIndex((u) => u.id === userToEdit.id);
       dispatch(updateUsuario({ index, user }))
       } else {
         dispatch(addUsuario({  id, nombre, cedula, edad, aseguradora, servicio, creacion }));
       }
       dispatch(clearEdit());
-      navigate('/aurgentcare');
+      navigate('/administrador/aurgentcare');
     };
 
 
@@ -135,8 +140,12 @@ export function ModalCrearyEditar(){
                     onChange={(e) => setAseguradora(e.target.value)}
                     value={aseguradora}
                   >
+                    <option value="">Selecciona la aseguradora</option>
                     <option value="Seguros Caracas">Seguros Caracas</option>
                     <option value="Seguros Mercantil">Seguros Mercantil</option>
+                    <option value="Seguros Horizonte">Seguros Horizonte</option>
+                    <option value="Seguros Piramide">Seguros Pirámide</option>
+
                   </select>
                 </div>
               </div>
@@ -148,7 +157,9 @@ export function ModalCrearyEditar(){
                  Servicios
                 </label>
                 <div>
-                  <SelectServicio name="servicio" value={ servicio.length > 0 ? servicio.label : []  } onChange={setServicio}/>
+                  <SelectServicio name="servicio" 
+                  value={ servicio.length > 0 ? servicio.label : []  } 
+                  onChange={setServicio}/>
                   {/* <select
                     name="servicio"
                     className="w-full rounded-lg"
@@ -186,10 +197,9 @@ export function ModalCrearyEditar(){
             </div>
 
             <div>
-              <button className="mr-6" type="submit">
-                
-                {isEditing ? <ButtonPrimary text="Editar"/> : <ButtonPrimary text="Agregar"/>}</button>
-              <Link to={"/aurgentcare"}>
+              <button type="submit" className="mr-6"> {isEditing ? "Editar" : "Agregar"} </button>
+
+              <Link to={"aurgentcare"}>
                 <ButtonCancel text="Cancelar" />
               </Link>
             </div>

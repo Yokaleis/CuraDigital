@@ -18,7 +18,9 @@ const userSlice = createSlice({
     //EDITAR
     updateUsuario: (state, action) => {
       const { index, user } = action.payload;
-      state.usuarios[index] = user;
+      if ( index !== -1 ) {
+        state.usuarios[index] = {...user};
+      }
     },
     //ELIMINAR
     deleteUsuario: (state, action) => {
