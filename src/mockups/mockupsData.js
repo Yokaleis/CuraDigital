@@ -6,7 +6,9 @@ export const people = [
       nombre: 'Ana Brenda Martínez',
       cedula: '8254125',
       edad: '21',
+      nacimiento: '01/04/198',
       aseguradora: 'Seguros Caracas',
+      plan: 'Elite Caracas Salud',
       servicio: ['Laboratorio', 'Cirugia', 'Procedimiento'],
       creacion: '28/10/2023',
       via: 'OMT'

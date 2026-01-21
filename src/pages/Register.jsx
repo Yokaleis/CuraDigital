@@ -4,6 +4,8 @@ import { auth, db } from '../Firebase/credenciales'
 import { ButtonPrimary } from './component/Buttons'
 import { setDoc, doc } from 'firebase/firestore'
 import { Link } from 'react-router-dom'
+import headerImg from "../assets/bg-login.svg";
+
 
 
 export function Register() {
@@ -74,9 +76,9 @@ export function Register() {
     };
     return (
         <>
-            <div className="grid grid-cols-[30%_60%] h-screen overflow-y-hidden">
-                <div className="bg-primary opacity-50"></div>
-                <div className="p-40">
+            <div className="overflow-y-hidden min-h-screen grid grid-cols-[40%_60%]">
+                <div className="h-full bg-cover bg-center" style={{ backgroundImage: `url(${headerImg})` }}></div>
+                <div className="p-40 h-full overflow-y-auto">
                     <section className="w-90 mb-10">
                         <h1 className="text-3xl font-bold">Regístrate</h1>
                         <p>Bienvenido a nuestro sistema de atención y emergencias médicas, por favor introduzca su usuario y contraseña para ingresar.</p>

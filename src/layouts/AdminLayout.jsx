@@ -9,9 +9,6 @@ export const AdminLayout = () => {
             <div className="xl:col-span-5 p-4">
                 <div><Outlet/></div>
             </div>
-
-            
-            
         </div>
     )
 }

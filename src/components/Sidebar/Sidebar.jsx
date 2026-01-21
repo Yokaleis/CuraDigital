@@ -75,6 +75,8 @@ export function Sidebar() {
 export function SidebarCondicional() {
     const [showMenu, setShowMenu] = useState(false);
     const [showSubMenu, setShowSubMenu] = useState(false);
+    const [showServicios, setShowServicios] = useState(false);
+    const [showAdministracion, setShowAdministracion] = useState(false);
 
 
     function handleLogout() {
@@ -105,14 +107,30 @@ export function SidebarCondicional() {
                     { path: "analistas", label: "Analistas" },
                 ],
             },
+            {
+                administracion: [
+                    { path: "afiliados", label: "Afiliados" },
+                    { path: "clientes", label: "Clientes" },
+                    { path: "planes", label: "Planes" },
+
+                ]
+            },
+            {
+                servicios: [
+                    { path: "sevicioomv", label: "OMV" },
+                    { path: "seviciolab", label: "LAB" },
+                    { path: "sevicioemd", label: "EMD" },
+
+                ]
+            },
             { path: "atenciones", label: "Atenciones" },
             { path: "aurgentcare", label: "Urgent Care" },
-            
+
         ],
         despachador: [
             { path: "home", label: "Home" },
             { path: "ateprogramadas", label: "Atenciones programadas" },
-            { path: "gservicios", label: "Gestión de servicios" }
+            { path: "gservicios", label: "Gestión de servicios" },
         ]
     }
 
@@ -134,7 +152,7 @@ export function SidebarCondicional() {
                         <span className="ml-4 text-xs">{usuario?.email}</span>
                     </div>
             </div>
-            <hr class="my-8 border-gray-200 dark:border-gray-700" />
+            <hr className="my-8 border-gray-200 dark:border-gray-700" />
             <div>
                 <ul>
                 {opciones.map((item) => (
@@ -143,7 +161,7 @@ export function SidebarCondicional() {
                         <Link className="flex px-4 font-bold hover:text-primary transition-colors" to={item.path}>{item.label}</Link>
                     </li>
                     {item.dashboards && (
-                       <li className="mb-8">
+                       <li className="mb-8" key={item.path}>
                             <button onClick={() => setShowSubMenu(!showSubMenu)}
                                 className="w-full flex items-center justify-between  py-2 px-4 rounded-lg hover:text-primary transition-colors">
                                 <span className="flex items-center font-bold">Dashboards</span>
@@ -155,18 +173,67 @@ export function SidebarCondicional() {
                             </button>
                     <ul className={`my-2 ${!showSubMenu && "hidden"}`}>
                         {item.dashboards.map((subItem, subIndex) => (
-                            <li className="mb-2" key={subItem}>
+                            <li className="mb-2" key={subIndex}>
                         <Link to="salaobservacionesuc" className="p-4 hover:text-primary">{subItem.label}</Link>
                         </li>
                         ))}
                     </ul>
+                    
                 </li>
                     )}
-                   </> 
-                ))}
-                <hr class="my-8 border-gray-200 dark:border-gray-700" />
+
+                     {item.servicios && (
+                       <li className="mb-8" key={item.path}>
+                            <button onClick={() => setShowServicios(!showServicios)}
+                                className="w-full flex items-center justify-between  py-2 px-4 rounded-lg hover:text-primary transition-colors">
+                                <span className="flex items-center font-bold">Servicios</span>
+                                <HiChevronDown
+                                    className={`mt-1 ${
+                                        showServicios && "rotate-180"
+                                    } transition-all`}
+                                    />
+                            </button>
+                    <ul className={`my-2 ${!showServicios && "hidden"}`}>
+                        {item.servicios.map((subItem, subIndex) => (
+                            <li className="mb-2" key={subIndex}>
+                        <Link to={subItem.path} className="p-4 hover:text-primary">{subItem.label}</Link>
+                        </li>
+                        ))}
+                    </ul>
+                    
+                </li>
+                    )}
                    
+                   {item.administracion && (
+                       <li className="mb-8" key={item.path}>
+                            <button onClick={() => setShowAdministracion(!showAdministracion)}
+                                className="w-full flex items-center justify-between  py-2 px-4 rounded-lg hover:text-primary transition-colors">
+                                <span className="flex items-center font-bold">Administración</span>
+                                <HiChevronDown
+                                    className={`mt-1 ${
+                                        showAdministracion && "rotate-180"
+                                    } transition-all`}
+                                    />
+                            </button>
+                    <ul className={`my-2 ${!showAdministracion && "hidden"}`}>
+                        {item.administracion.map((subItem, subIndex) => (
+                            <li className="mb-2" key={subIndex}>
+                        <Link to={subItem.path} className="p-4 hover:text-primary">{subItem.label}</Link>
+                        </li>
+                        ))}
+                    </ul>
+                
+                
+                </li>
+                    )}
+
+                     </>
+                ))}
+                 
             </ul>
+
+            <hr className="my-8 border-gray-200 dark:border-gray-700" />     
+        
             </div>
             <div className='mt-10'>
                 <ul>

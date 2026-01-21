@@ -78,7 +78,7 @@ export function TableBody() {
                   </td>
                   <td className="px-6 py-4">{user.creacion}</td>
                   {/* <td>{user.via}</td> */}
-                  <td className="px-6 py-4 grid grid-cols-2 gap-1">
+                  <td className="px-6 py-4 grid grid-cols-2 gap-1 place-items-center">
                     <button>
                       <HiOutlineTrash onClick={() => handleDelete(index)} />
                     </button>

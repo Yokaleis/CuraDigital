@@ -62,7 +62,7 @@ export function Login() {
     <>
       <div className="overflow-y-hidden min-h-screen grid grid-cols-[40%_60%]">
         <div  className="h-full bg-cover bg-center" style={{ backgroundImage: `url(${headerImg})` }}></div>
-        <div className="p-10 h-full overflow-y-auto">
+        <div className="p-40 h-full overflow-y-auto">
           <section className="w-[90%] mb-10">
             <h1 className="text-3xl font-bold">Hola, Bienvenido</h1>
             <p>Bienvenido a nuestro sistema de atención y emergencias médicas, por favor introduzca su usuario y contraseña para ingresar.</p>

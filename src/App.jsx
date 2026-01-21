@@ -29,6 +29,8 @@ import { LayoutAuth } from './layouts/LayoutAuth'
 import { Register } from './pages/Register'
 import PrivateRoute from './components/PrivateRoute'
 import Dashboards from './pages/Dashboards'
+import ServiciosOMV from './pages/admin/ServiciosOMV'
+import { Afiliados } from './pages/admin/Afiliados'
 
 
 
@@ -40,10 +42,12 @@ function App() {
       <AuthProvider>
         
           <Routes>
-            <Route path='/' element={<Login/>} />
+            <Route element={<LayoutAuth/>}>
+              <Route path='/' element={<Login/>} />
               <Route path='/login' index element={<Login />} />
               <Route path='/registro' element={<Register />} />
-            
+            </Route>
+          
 
             {/* RUTAS PRIVADAS */}
             <Route element={<PrivateRoute allowedReoles={["administrador"]} />}>
@@ -51,7 +55,9 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path='home' element={<Home />} />
                 <Route path='dashboards' element={<Dashboards/>}/>
+                <Route path='afiliados' element={<Afiliados/> }/>
                 <Route path='atenciones' element={<ListadoAtenciones />} />
+                <Route path='sevicioomv' element={<ServiciosOMV/>}/>
                 <Route path='salaobservacionesuc' element={<SalaObservacionUC />} />
                 <Route path='aurgentcare' element={<AntencionesUCcopy />} />
                 <Route path='nueva-atencion' element={<ModalCrearyEditar />} />
@@ -76,8 +82,6 @@ function App() {
         
       </AuthProvider></BrowserRouter>
    </>
-
-
 
     
   )
