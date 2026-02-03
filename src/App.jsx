@@ -31,6 +31,7 @@ import PrivateRoute from './components/PrivateRoute'
 import Dashboards from './pages/Dashboards'
 import ServiciosOMV from './pages/admin/ServiciosOMV'
 import { Afiliados } from './pages/admin/Afiliados'
+import { NuevoAfiliado } from './pages/admin/NuevoAfiliado'
 
 
 
@@ -56,6 +57,7 @@ function App() {
                 <Route path='home' element={<Home />} />
                 <Route path='dashboards' element={<Dashboards/>}/>
                 <Route path='afiliados' element={<Afiliados/> }/>
+                <Route path='nuevo-afiliado' element={<NuevoAfiliado/>}/>
                 <Route path='atenciones' element={<ListadoAtenciones />} />
                 <Route path='sevicioomv' element={<ServiciosOMV/>}/>
                 <Route path='salaobservacionesuc' element={<SalaObservacionUC />} />

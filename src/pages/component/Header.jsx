@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { IconArrowHeader } from "../../components/Icons/iconsSVG";
+
 export function Header(props) {
 
 
@@ -19,3 +22,15 @@ export function HeaderCaption(props) {
 
     )
 }
+
+export function HeaderSecondary(props) {
+
+
+    let { text, link } = props;
+    return (
+        <>
+            <div className="gap-4 h-[7vh] md:h-[10vh] border-b border-secondary-100 mb-10 flex items-center">
+               <Link to={link}><IconArrowHeader/> </Link><h1 className="font-bold text-3xl">{text}</h1>
+            </div>
+        </>
+)}

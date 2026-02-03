@@ -19,7 +19,8 @@ export default {
           retrasado: "#F43D3C",
           proceso: "#2B2C43",
           cancelado: "#B2B2B2",
-        }
+        },
+        color01: "#F7F6F9",
       }
     }
   },
