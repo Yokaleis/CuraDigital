@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Header } from '../component/Header'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import { ButtonPrimary, ButtonSecondary } from '../component/Buttons';
+import { child, get, getDatabase, onValue, ref } from 'firebase/database';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../Firebase/credenciales';
 
 
 export function TableHeader() {
@@ -26,6 +29,44 @@ export function TableHeader() {
 }
 
 export function TableBody() {
+
+  //TRAYENDO DATOS DE FIBASE DB
+  //Este metodo es para traer datos de cloud firestore
+  const [datosAfiliados, setDatosAfiliados] = useState([])
+
+  /* useEffect(() => {
+    const obtenerDatos = async () => {
+      const data = await getDocs(collection(db, "afiliados"));
+      setDatosAfiliados(data.docs.map(doc => ({...doc.data(), id: doc.id})));
+    };
+    obtenerDatos();
+  }, [])
+   */
+
+  //TRAYENDO DATOS DE FIBASE DB
+  //Este metodo es para traer datos de realtime database
+  
+  useEffect(() => {
+    const dbRef = ref(getDatabase());
+
+    get(child(dbRef, "afiliados/"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          // 2. Transformar el objeto de Firebase en un Array para poder usar .map()
+          const data = snapshot.val();
+          const listaFormateada = Object.keys(data).map(key => ({
+            id: key,
+            ...data[key]
+          }));
+          
+          setDatosAfiliados(listaFormateada); // 3. Actualizar el estado (esto dispara el render)
+        }
+      })
+      .catch((error) => console.error(error));
+  }, []); // El array vacío asegura que solo se ejecute al cargar el componente
+
+
+
   const usuarios = useSelector((state) => state.usuarios.usuarios);
   //console.log(usuariosState)
   const dispatch = useDispatch();
@@ -45,21 +86,21 @@ export function TableBody() {
       <div className="relative overflow-x-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <TableHeader />
-          {usuarios.length === 0 ? (
+          {datosAfiliados.length === 0 ? (
             <tr className="text-center">
                 <p className="w-[100%] text-[14px] text-black">No hay usuarios en la lista</p>
             </tr>
           ) : (
             <tbody>
-              {usuarios.map((user, index) => (
+              {datosAfiliados.map((user, index) => (
                 <tr
-                  key={index}
+                  key={user.id}
                   className="border border-[#E6EBF1] border-t-0 rounded-sm text-black text-center"
                 >
                   <td className="px-6 py-4">{user.nombre}</td>
                   <td className="px-6 py-4">{user.cedula}</td>
                   <td className="px-6 py-4">{user.edad}</td>
-                  <td className="px-6 py-4">{user.nacimiento}</td>
+                  <td className="px-6 py-4">{user.fechaNacimiento}</td>
                   <td className="px-6 py-4">{user.aseguradora}</td>
                   <td className="px-6 py-4">{user.plan}</td>
                   {/* <td>{user.via}</td> */}

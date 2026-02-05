@@ -6,11 +6,14 @@ import { HiPlus } from 'react-icons/hi'
 
 import { getDatabase, ref, set, push } from 'firebase/database';
 import appFirebaseCD from '../../Firebase/credenciales';
+import { CalcularEdad } from '../component/CalcularEdad';
 
 export function NuevoAfiliado() {
 
+    //TODO: SIMPLIFICAR ESTO 
     const [nombre, setNombre] = useState("");
     const [cedula, setCedula] = useState("");
+    const [edad, setEdad] = useState("");
     const [genero, setGenero] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [direccion, setDireccion] = useState("");
@@ -24,6 +27,7 @@ export function NuevoAfiliado() {
     const [fechaInicioPoliza, setFechaInicioPoliza] = useState("");
     const [fechaFinPoliza, setFechaFinPoliza] = useState("");
 
+   
 
     const guardarDatos = async (e) => {
         e.preventDefault();
@@ -33,6 +37,7 @@ export function NuevoAfiliado() {
         set(newDocRef, {
             nombre,
             cedula,
+            edad,
             genero,
             fechaNacimiento,
             direccion,
@@ -111,7 +116,7 @@ export function NuevoAfiliado() {
                       </select>
                   </div>
                   {/* FECHA NACIMIENTO */}
-                  <div>
+                 {/*  <div>
                       <label htmlFor="fechaNacimiento" className="font-semibold">
                           Fecha de nacimiento
                       </label>
@@ -126,7 +131,8 @@ export function NuevoAfiliado() {
                               className="w-full mt-2 p-2 border-none rounded bg-color01 text-gray-400"
                           />
                       </div>
-                  </div>
+                  </div> */}
+                   <CalcularEdad edad={edad} fecha={fechaNacimiento} onEdadChange={setEdad} onFechaChange={setFechaNacimiento} />
                   {/* DIRECCIÓN */}
                   <div>
                       <label htmlFor="direccion" className="font-semibold">
